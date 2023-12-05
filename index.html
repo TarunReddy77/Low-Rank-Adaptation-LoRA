@@ -34,7 +34,17 @@
             <h2>An Analysis of "LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS"</h2>
             <p>The paper titled "LoRA: Low-Rank Adaptation of Large Language Models" presents an innovative approach to fine-tuning large pre-trained language models for specific tasks. The primary focus of this paper is to address the challenge of adapting these massive models, such as GPT-3, which are often prohibitively expensive to fine-tune and deploy due to their size and the number of parameters.</p>
             <p>LoRA represents a significant advancement in the democratization of Large Language Models (LLMs) and similar expansive models. This approach effectively bridges the gap for individuals and organizations with limited budgets and computing resources, enabling them to fine-tune state-of-the-art large models. Previously, such an endeavor was predominantly feasible for major corporations equipped with substantial financial and computational capabilities. LoRA, therefore, marks a pivotal shift, making advanced AI technologies more accessible and leveling the playing field in the realm of AI research and application.</p>
-            <h2>Introduction</h2>
+            <h2>Methodology</h2>
+            <p>
+                Neural networks are composed of numerous dense layers that execute matrix multiplication tasks. Typically, these layers' weight matrices are of full rank. According to Aghajanyan et al. (2020), pre-trained language models, although they possess a low "intrinsic dimension," are still capable of efficient learning, even when subjected to a random projection into a smaller subspace. This insight leads us to propose that weight updates during adaptation also exhibit a low "intrinsic rank." To update a pre-trained weight matrix W<sub>0</sub> in R<sup>d×k</sup>, we apply a low-rank decomposition: W<sub>0</sub> + ΔW = W<sub>0</sub> + BA, where B ∈ R<sup>d×r</sup>, A ∈ R<sup>r×k</sup>, and the rank r ≤ min(d, k). Throughout training, W<sub>0</sub> remains static without receiving gradient updates, whereas A and B are adjustable parameters. Both W<sub>0</sub> and ΔW = BA are multiplied by the same input, and their output vectors are aggregated on a coordinate-wise basis. Therefore, for h = W<sub>0</sub>x, our adjusted forward pass formula becomes: h = W<sub>0</sub>x + ΔWx = W<sub>0</sub>x + BAx. This reparameterization is depicted in Figure 1. For initialization, A is set to a random Gaussian distribution, and B is set to zero, resulting in ΔW = BA being zero at the start of training. We then adjust ΔWx by a factor of α/r, where α is a constant relative to r. Optimizing with Adam, adjusting α parallels tuning the learning rate, provided the initialization is scaled accordingly. Consequently, we fix α to the initial r value tested and do not modify it further. This scaling technique is instrumental in minimizing the need to recalibrate hyperparameters when varying r (Yang & Hu, 2021).
+                </p>
+                
+            <img src="images/architecture.png">
+            <img src="images/Wo%20equation.png">
+            <img src="images/A%20and%20B%20equation.png">
+            <img src="images/equation.png">
+            <img src="images/fft%20objective%20equation.png">
+            <img src="images/lora%20objective%20function.png">
             <ul class="text-left">
                 <li>
                     <p>
@@ -57,12 +67,8 @@
                     </p>
                 </li>
             </ul>
-            <img src="images/architecture.png">
-            <img src="images/Wo%20equation.png">
-            <img src="images/A%20and%20B%20equation.png">
-            <img src="images/equation.png">
-            <img src="images/fft%20objective%20equation.png">
-            <img src="images/lora%20objective%20function.png">
+            
+            
             <img src="images/graphs.png">
             <img src="images/gpt3%20lora.png">
             <img src="images/num_trainable_params_table.png">
