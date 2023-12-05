@@ -1,86 +1,206 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Your Project Name</title>
-<meta property="og:title" content=Your Project Name" />
-<meta name="twitter:title" content="Your Project Name" />
-<meta name="description" content="Your project about your cool topic described right here." />
-<meta property="og:description" content="Your project about your cool topic described right here." />
-<meta name="twitter:description" content="Your project about your cool topic described right here." />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" /> 
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<!-- bootstrap for mobile-friendly layout -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-<link href="style.css" rel="stylesheet">
+    <title>Your Project Name</title>
+    <meta property="og:title" content=Your Project Name" />
+    <meta name="twitter:title" content="Your Project Name" />
+    <meta name="description" content="Your project about your cool topic described right here." />
+    <meta property="og:description" content="Your project about your cool topic described right here." />
+    <meta name="twitter:description" content="Your project about your cool topic described right here." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- bootstrap for mobile-friendly layout -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 
 </head>
 <body class="nd-docs">
 <div class="nd-pageheader">
- <div class="container">
- <h1 class="lead">
- <nobr class="widenobr">Your Project Name</nobr>
- <nobr class="widenobr">For CS 7150</nobr>
- </h1>
- </div>
+    <div class="container">
+        <h1 class="lead">
+            <nobr class="widenobr"><b>P</b>arameter <b>E</b>fficient <b>F</b>ine <b>T</b>uning of <b>LLM</b>s through <b>Lo</b>w <b>R</b>ank <b>A</b>daptation</nobr>
+<!--            <nobr class="widenobr">for CS 7150</nobr>-->
+        </h1>
+    </div>
 </div><!-- end nd-pageheader -->
 
 <div class="container">
-<div class="row">
-<div class="col justify-content-center text-center">
-<h2>An Analysis of [papername]</h2>
-<p>Describe the paper and the big question about it that interests you.</p>
-</div>
-</div>
-<div class="row">
-<div class="col">
+    <div class="row">
+        <div class="col justify-content-center text-center">
+            <h2>An Analysis of "LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS"</h2>
+            <p>Describe the paper and the big question about it that interests you.</p>
+            <ul>
+                <li>
+                    Challenges of Fine-Tuning: Large-scale pre-trained language models, such as GPT-3, present challenges in deployment due to the extensive parameters involved in fine-tuning, making it computationally and storage-intensive.
+                </li>
+                <li>
+                    Drawbacks of Traditional Methods: Conventional approaches involving external modules for new tasks often introduce latency and compromise between efficiency and model quality, highlighting the need for more efficient adaptation strategies.
+                </li>
+                <li>
+                    Inspiration from Intrinsic Dimension: Taking inspiration from studies showing that over-parametrized models have a low intrinsic dimension, the proposed Low-Rank Adaptation (LoRA) approach leverages this concept to reduce the number of parameters needed during model adaptation.
+                </li>
+                <li>
+                    LoRA Efficiency: By optimizing rank decomposition matrices of dense layers' weight changes while keeping pre-trained weights frozen, LoRA achieves storage and compute efficiency. Even with models as large as GPT-3, a very low rank proves sufficient, making LoRA a practical and effective solution for efficient model adaptation.
+                </li>
+            </ul>
+            <img src="images/architecture.png">
+            <img src="images/Wo%20equation.png">
+            <img src="images/A%20and%20B%20equation.png">
+            <img src="images/equation.png">
+            <img src="images/graphs.png">
+            <img src="images/num_trainable_params_table.png">
+            <img src="images/ranks_comparision_table.png">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
 
-<h2>Literature Review; Biography; Social Impact; Industry Applications; Follow-on Research; and Peer-Review</h2>
+            <h2>Literature Review</h2>
+            <p>
+                <b>Fine-Tuning (FT)</b> is a common approach for adaptation. During fine-tuning, the model is initialized
+                to the pre-trained weights and biases, and all model parameters undergo gradient updates.A simple
+                variant is to update only some layers while freezing others. We include one such baseline reported
+                in prior work (Li & Liang, 2021) on GPT-2, which adapts just the last two layers (FTTop2).
+            </p>
+            <p>
+                <b>Bias-only or BitFit</b> is a baseline where we only train the bias vectors while freezing everything else.
+                Contemporarily, this baseline has also been studied by BitFit (Zaken et al., 2021).
+            </p>
+            <p>
+                <b>Prefix-embedding tuning (PreEmbed)</b> inserts special tokens among the input tokens. These spe
+                cial tokens have trainable word embeddings and are generally not in the model’s vocabulary. Where
+                to place such tokens can have an impact on performance. We focus on “prefixing”, which prepends
+                such tokens to the prompt, and “infixing”, which appends to the prompt; both are discussed in Li &
+                Liang (2021). We use lp (resp. li) denote the number of prefix (resp. infix) tokens. The number of
+                trainable parameters is
+                =dmodel (lp +li).
+            </p>
+            <p>
+                <b>Prefix-layer tuning (PreLayer)</b> is an extension to prefix-embedding tuning. Instead of just learning
+                the word embeddings (or equivalently, the activations after the embedding layer) for some special
+                tokens, we learn the activations after every Transformer layer. The activations computed from pre
+                vious layers are simply replaced by trainable ones. The resulting number of trainable parameters is
+                =L dmodel (lp+li),whereListhe number of Transformer layers.
+            </p>
+            <p>
+                <b>Adapter tuning</b> as proposed in Houlsby et al. (2019) inserts adapter layers between the self
+                attention module (and the MLP module) and the subsequent residual connection. There are two
+                fully connected layers with biases in an adapter layer with a nonlinearity in between. We call this
+                original design AdapterH. Recently, Lin et al. (2020) proposed a more efficient design with the
+                adapter layer applied only after the MLP module and after a LayerNorm. We call it AdapterL. This
+                is very similar to another deign proposed in Pfeiffer et al. (2021), which we call AdapterP. We also
+                include another baseline call AdapterDrop (R¨ uckl´ e et al., 2020) which drops some adapter layers for
+                greater efficiency (AdapterD). We cite numbers from prior works whenever possible to maximize
+                the number of baselines we compare with; they are in rows with an asterisk (*) in the first column.
+                In all cases, we have
+                = LAdpt (2 dmodel r+r+dmodel)+2 LLN dmodel where LAdpt
+                is the number of adapter layers and LLN the number of trainable LayerNorms (e.g., in AdapterL).
+            </p>
+                <h2>Biography</h2>
+                <h5>Edward Hu</h5>
+                <p>I am a Ph.D. student advised by Yoshua Bengio. My research on robust reasoning is supported by a Université de Montréal Graduate AI Fellowship.
+                    Before graduate school, I was a researcher at Microsoft working on the large-scale deployment of GPT-3, principled approaches to large model training, and theories of infinitely wide neural networks. I am the proud creator of LoRA and μTransfer.
+                    I spent a year as an AI resident at Microsoft Research Redmond, where I worked closely with Greg Yang, now a cofounder of xAI. I graduated with a bachelor's degree in Computer Science and Cognitive Science from Johns Hopkins University, where I was advised by Ben Van Durme.</p>
+                <h2>Social Impact</h2>
+                <p>Fine-tuning enormous language models is prohibitively expensive in terms of the hardware required and the storage/switching cost for hosting independent instances for different tasks. We propose LoRA, an efficient adaptation strategy that neither introduces inference latency nor reduces input sequence length while retaining high model quality. Importantly, it allows for quick task-switching when deployed as a service by sharing the vast majority of the model parameters. While we focused on Transformer language models, the proposed principles are generally applicable to any neural networks with dense layers.</p>
+                <ul>
+                    <li>
+                        <b>Resource Efficiency:</b> LoRA's ability to significantly reduce the number of parameters needed for model adaptation implies a potential reduction in computational and storage requirements. This could democratize access to advanced natural language processing capabilities, allowing a broader range of individuals, organizations, and applications to benefit from these technologies without extensive infrastructure.
+                    </li>
+                    <li>
+                        <b>Energy Consumption:</b> The more efficient use of computational resources can contribute to a decrease in overall energy consumption associated with training and deploying large language models. This aligns with growing concerns about the environmental impact of AI technologies and supports sustainable practices in the development of advanced language models.
+                    </li>
+                </ul>
+                <h2>Industry Applications</h2>
+                <h2>Follow-on Research</h2>
+            <p>There are many directions for future works such as: </p>
+                    <ol>
+                        <li>
+                            LoRA can be combined with other efficient adaptation methods, potentially providing orthogonal improvement.
+                        </li>
+                        <li>
+                            The mechanism behind fine-tuning or LoRA is far from clear – how are features learned during pre-training
+                            transformed to do well on downstream tasks? We believe that LoRA makes it more tractable to answer this
+                            than full fine-tuning.
+                        </li>
+                        <li>
+                            We mostly depend on heuristics to select the weight matrices to apply LoRA to. Are there more principled
+                            ways to do it?
+                        </li>
+                        <li>
+                            Finally, the rank-deficiency of W suggests that W could be rank-deficient as well, which can also be a
+                            source of inspiration for future works.
+                        </li>
+                    </ol>
+                <h2>Peer-Review</h2>
 
-<p>Just as we have done in the role-playing exercise, analyze the paper from all perspectives.
-</p>
+                <p>Just as we have done in the role-playing exercise, analyze the paper from all perspectives.
+                </p>
 
-<p>Optionally, in addition to a reading-based analysis, implement the ideas of the paper in code, and report on your findings.
-</p>
+                <p>Optionally, in addition to a reading-based analysis, implement the ideas of the paper in code, and report on your findings.
+                </p>
 
-<h3>References</h3>
+                <h3>References</h3>
+                <p>
+                    [1]<a href="http://arxiv.org/abs/2005.14165"> Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhari
+                    wal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal,
+                    Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M.
+                    Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin,
+                    Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford,
+                    Ilya Sutskever, and Dario Amodei. <em>Language Models are Few-Shot Learners.</em></a> arXiv:2005.14165
+                    [cs], July 2020.</p>
+                <p>
+                    [2]<a href="https://arxiv.org/abs/1902.00751"> Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin de Laroussilhe,
+                    Andrea Gesmundo, Mona Attariyan, and Sylvain Gelly. <em>Parameter-Efficient Transfer Learning
+                    for NLP.</em></a> arXiv:1902.00751 [cs, stat], June 2019.
+                    00751.
+                </p>
+                <p>
+                    [3]<a href="http://arxiv.org/abs/2101.00190"> Xiang Lisa Li and Percy Liang. <em>Prefix-Tuning: Optimizing Continuous Prompts for Generation.</em></a>
+                    arXiv:2101.00190 [cs], January 2021.
+                </p>
+                <p>
+                    [4]<a href="http://arxiv.org/abs/2012.13255"> Armen Aghajanyan, Luke Zettlemoyer, and Sonal Gupta. <em>Intrinsic Dimensionality Explains the
+                    Effectiveness of Language Model Fine-Tuning.</em></a> arXiv:2012.13255 [cs], December 2020.
+                </p>
+                <p>
+                    [5]<a href="https://arxiv.org/abs/1706.03762"> Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez,
+                    Łukasz Kaiser, and Illia Polosukhin. <em>Attention is all you need.</em></a> In Proceedings of the 31st In
+                    ternational Conference on Neural Information Processing Systems, pp. 6000–6010, 2017.
+                </p>
 
-<p><a name="bottou-1990">[1]</a> <a href="https://papers.baulab.info/Bottou-1990.pdf"
-  >L&eacute;on Bottou and Patrick Gallinari.
-  <em>A framework for the cooperation of learning algorithms.</em></a>
-  Advances in neural information processing systems 3 (1990).
-</p>
+                <h2>Team Members</h2>
 
-<h2>Team Members</h2>
-                                                   
-<p>Make sure to list here is who is on the team.</p>
+                <p>Tarun Reddy Thandu, Bhavya Pranav Tandra</p>
 
-  
-</div><!--col-->
-</div><!--row -->
+
+        </div><!--col-->
+    </div><!--row -->
 </div> <!-- container -->
 
 <footer class="nd-pagefooter">
-  <div class="row">
-    <div class="col-6 col-md text-center">
-      <a href="https://cs7150.baulab.info/">About CS 7150</a>
+    <div class="row">
+        <div class="col-6 col-md text-center">
+<!--            <a href="https://cs7150.baulab.info/">About CS 7150</a>-->
+            <a href="https://arxiv.org/pdf/2106.09685.pdf">See LoRA paper</a>
+        </div>
     </div>
-  </div>
 </footer>
 
 </body>
 <script>
-$(document).on('click', '.clickselect', function(ev) {
-  var range = document.createRange();
-  range.selectNodeContents(this);
-  var sel = window.getSelection();
-  sel.removeAllRanges();
-  sel.addRange(range);
-});
-// Google analytics below.
-window.dataLayer = window.dataLayer || [];
+    $(document).on('click', '.clickselect', function(ev) {
+        var range = document.createRange();
+        range.selectNodeContents(this);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    });
+    // Google analytics below.
+    window.dataLayer = window.dataLayer || [];
 </script>
 </html>
