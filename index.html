@@ -35,25 +35,36 @@
             <p>The paper titled "LoRA: Low-Rank Adaptation of Large Language Models" presents an innovative approach to fine-tuning large pre-trained language models for specific tasks. The primary focus of this paper is to address the challenge of adapting these massive models, such as GPT-3, which are often prohibitively expensive to fine-tune and deploy due to their size and the number of parameters.</p>
             <p>LoRA represents a significant advancement in the democratization of Large Language Models (LLMs) and similar expansive models. This approach effectively bridges the gap for individuals and organizations with limited budgets and computing resources, enabling them to fine-tune state-of-the-art large models. Previously, such an endeavor was predominantly feasible for major corporations equipped with substantial financial and computational capabilities. LoRA, therefore, marks a pivotal shift, making advanced AI technologies more accessible and leveling the playing field in the realm of AI research and application.</p>
             <h2>Introduction</h2>
-            <ul>
+            <ul class="text-left">
                 <li>
-                    Challenges of Fine-Tuning: Large-scale pre-trained language models, such as GPT-3, present challenges in deployment due to the extensive parameters involved in fine-tuning, making it computationally and storage-intensive.
+                    <p>
+                    <b>Challenges of Fine-Tuning:</b> Large-scale pre-trained language models, such as GPT-3, present challenges in deployment due to the extensive parameters involved in fine-tuning, making it computationally and storage-intensive.
+                    </p>
                 </li>
                 <li>
-                    Drawbacks of Traditional Methods: Conventional approaches involving external modules for new tasks often introduce latency and compromise between efficiency and model quality, highlighting the need for more efficient adaptation strategies.
+                    <p>
+                    <b>Drawbacks of Traditional Methods:</b> Conventional approaches involving external modules for new tasks often introduce latency and compromise between efficiency and model quality, highlighting the need for more efficient adaptation strategies.
+                    </p>
                 </li>
                 <li>
-                    Inspiration from Intrinsic Dimension: Taking inspiration from studies showing that over-parametrized models have a low intrinsic dimension, the proposed Low-Rank Adaptation (LoRA) approach leverages this concept to reduce the number of parameters needed during model adaptation.
+                    <p>
+                    <b>Inspiration from Intrinsic Dimension:</b> Taking inspiration from studies showing that over-parametrized models have a low intrinsic dimension, the proposed Low-Rank Adaptation (LoRA) approach leverages this concept to reduce the number of parameters needed during model adaptation.
+                    </p>
                 </li>
                 <li>
-                    LoRA Efficiency: By optimizing rank decomposition matrices of dense layers' weight changes while keeping pre-trained weights frozen, LoRA achieves storage and compute efficiency. Even with models as large as GPT-3, a very low rank proves sufficient, making LoRA a practical and effective solution for efficient model adaptation.
+                    <p>
+                    <b>LoRA Efficiency:</b> By optimizing rank decomposition matrices of dense layers' weight changes while keeping pre-trained weights frozen, LoRA achieves storage and compute efficiency. Even with models as large as GPT-3, a very low rank proves sufficient, making LoRA a practical and effective solution for efficient model adaptation.
+                    </p>
                 </li>
             </ul>
             <img src="images/architecture.png">
             <img src="images/Wo%20equation.png">
             <img src="images/A%20and%20B%20equation.png">
             <img src="images/equation.png">
+            <img src="images/fft%20objective%20equation.png">
+            <img src="images/lora%20objective%20function.png">
             <img src="images/graphs.png">
+            <img src="images/gpt3%20lora.png">
             <img src="images/num_trainable_params_table.png">
             <img src="images/ranks_comparision_table.png">
         </div>
@@ -63,44 +74,32 @@
 
             <h2>Literature Review</h2>
             <p>
+                There have been many works on performing fine-tuning of Large Language Models for specific downstream tasks in a parameter efficient manner
+                in order to reduce the storage and computational costs. The paper discusses the below competitive approaches:
+            </p>
+            <p>
                 <b>Fine-Tuning (FT)</b> is a common approach for adaptation. During fine-tuning, the model is initialized
-                to the pre-trained weights and biases, and all model parameters undergo gradient updates.A simple
-                variant is to update only some layers while freezing others. We include one such baseline reported
-                in prior work (Li & Liang, 2021) on GPT-2, which adapts just the last two layers (FTTop2).
+                to the pre-trained weights and biases, and all model parameters undergo gradient updates. A simple
+                variant is to update only some layers while freezing others (e.g. updating just the last two layers (FTTop2)).
             </p>
             <p>
                 <b>Bias-only or BitFit</b> is a baseline where we only train the bias vectors while freezing everything else.
-                Contemporarily, this baseline has also been studied by BitFit (Zaken et al., 2021).
             </p>
             <p>
-                <b>Prefix-embedding tuning (PreEmbed)</b> inserts special tokens among the input tokens. These spe
-                cial tokens have trainable word embeddings and are generally not in the model’s vocabulary. Where
+                <b>Prefix-embedding tuning (PreEmbed)</b> inserts special tokens among the input tokens. These special tokens have trainable word embeddings and are generally not in the model’s vocabulary. Where
                 to place such tokens can have an impact on performance. We focus on “prefixing”, which prepends
-                such tokens to the prompt, and “infixing”, which appends to the prompt; both are discussed in Li &
-                Liang (2021). We use lp (resp. li) denote the number of prefix (resp. infix) tokens. The number of
-                trainable parameters is
-                =dmodel (lp +li).
+                such tokens to the prompt, and “infixing”, which appends to the prompt.
             </p>
             <p>
                 <b>Prefix-layer tuning (PreLayer)</b> is an extension to prefix-embedding tuning. Instead of just learning
                 the word embeddings (or equivalently, the activations after the embedding layer) for some special
                 tokens, we learn the activations after every Transformer layer. The activations computed from pre
-                vious layers are simply replaced by trainable ones. The resulting number of trainable parameters is
-                =L dmodel (lp+li),whereListhe number of Transformer layers.
+                vious layers are simply replaced by trainable ones.
             </p>
             <p>
-                <b>Adapter tuning</b> as proposed in Houlsby et al. (2019) inserts adapter layers between the self
+                <b>Adapter tuning</b> inserts adapter layers between the self
                 attention module (and the MLP module) and the subsequent residual connection. There are two
-                fully connected layers with biases in an adapter layer with a nonlinearity in between. We call this
-                original design AdapterH. Recently, Lin et al. (2020) proposed a more efficient design with the
-                adapter layer applied only after the MLP module and after a LayerNorm. We call it AdapterL. This
-                is very similar to another deign proposed in Pfeiffer et al. (2021), which we call AdapterP. We also
-                include another baseline call AdapterDrop (R¨ uckl´ e et al., 2020) which drops some adapter layers for
-                greater efficiency (AdapterD). We cite numbers from prior works whenever possible to maximize
-                the number of baselines we compare with; they are in rows with an asterisk (*) in the first column.
-                In all cases, we have
-                = LAdpt (2 dmodel r+r+dmodel)+2 LLN dmodel where LAdpt
-                is the number of adapter layers and LLN the number of trainable LayerNorms (e.g., in AdapterL).
+                fully connected layers with biases in an adapter layer with a nonlinearity in between.
             </p>
                 <h2>Biography</h2>
                 <table>
@@ -202,7 +201,7 @@
                   </table>
                   
                 <h2>Social Impact</h2>
-                <p>Fine-tuning enormous language models is prohibitively expensive in terms of the hardware required and the storage/switching cost for hosting independent instances for different tasks. We propose LoRA, an efficient adaptation strategy that neither introduces inference latency nor reduces input sequence length while retaining high model quality. Importantly, it allows for quick task-switching when deployed as a service by sharing the vast majority of the model parameters. While we focused on Transformer language models, the proposed principles are generally applicable to any neural networks with dense layers.</p>
+                <p>Fine-tuning enormous language models is prohibitively expensive in terms of the hardware required and the storage/switching cost for hosting independent instances for different tasks. LoRA is an efficient adaptation strategy that neither introduces inference latency nor reduces input sequence length while retaining high model quality. Importantly, it allows for quick task-switching when deployed as a service by sharing the vast majority of the model parameters (W matrices) and only changing the A and B matrices for the task at hand. While it is demonstrated on Transformer language models, the proposed principles could be generally applicable to any neural networks with dense layers. The following points elaborate its social impact:</p>
                 <ul>
                     <li>
                         <b>Resource Efficiency:</b> LoRA's ability to significantly reduce the number of parameters needed for model adaptation implies a potential reduction in computational and storage requirements. This could democratize access to advanced natural language processing capabilities, allowing a broader range of individuals, organizations, and applications to benefit from these technologies without extensive infrastructure.
@@ -211,7 +210,7 @@
                         <b>Energy Consumption:</b> The more efficient use of computational resources can contribute to a decrease in overall energy consumption associated with training and deploying large language models. This aligns with growing concerns about the environmental impact of AI technologies and supports sustainable practices in the development of advanced language models.
                     </li>
                 </ul>
-                <h2>Industry Applications of LoRA (Low-Rank Adaptation)</h2>
+                <h2>Industry Applications</h2>
                 
     <ol>
         <li>
@@ -238,7 +237,7 @@
             <p>There are many directions for future works such as: </p>
                     <ol>
                         <li>
-                            LoRA can be combined with other efficient adaptation methods, potentially providing orthogonal improvement.
+                            LoRA can be combined with other efficient adaptation methods like prefix tuning, potentially providing orthogonal improvement.
                         </li>
                         <li>
                             The mechanism behind fine-tuning or LoRA is far from clear – how are features learned during pre-training
@@ -255,10 +254,6 @@
                         </li>
                     </ol>
                 <h2>Peer-Review</h2>
-
-                
-
-                <h5><b>Reviewer: </b>Bhavya Pranav Tandra</h5>
                 <h5><b>Strong Accept</b></h5>
                 
                 <b>Paper Summary:</b>
