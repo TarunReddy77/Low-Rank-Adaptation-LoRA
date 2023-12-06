@@ -36,15 +36,43 @@
             <p>LoRA represents a significant advancement in the democratization of Large Language Models (LLMs) and similar expansive models. This approach effectively bridges the gap for individuals and organizations with limited budgets and computing resources, enabling them to fine-tune state-of-the-art large models. Previously, such an endeavor was predominantly feasible for major corporations equipped with substantial financial and computational capabilities. LoRA, therefore, marks a pivotal shift, making advanced AI technologies more accessible and leveling the playing field in the realm of AI research and application.</p>
             <h2>Methodology</h2>
             <p>
-                Neural networks are composed of numerous dense layers that execute matrix multiplication tasks. Typically, these layers' weight matrices are of full rank. According to Aghajanyan et al. (2020), pre-trained language models, although they possess a low "intrinsic dimension," are still capable of efficient learning, even when subjected to a random projection into a smaller subspace. This insight leads us to propose that weight updates during adaptation also exhibit a low "intrinsic rank." To update a pre-trained weight matrix W<sub>0</sub> in R<sup>d×k</sup>, we apply a low-rank decomposition: W<sub>0</sub> + ΔW = W<sub>0</sub> + BA, where B ∈ R<sup>d×r</sup>, A ∈ R<sup>r×k</sup>, and the rank r ≤ min(d, k). Throughout training, W<sub>0</sub> remains static without receiving gradient updates, whereas A and B are adjustable parameters. Both W<sub>0</sub> and ΔW = BA are multiplied by the same input, and their output vectors are aggregated on a coordinate-wise basis. Therefore, for h = W<sub>0</sub>x, our adjusted forward pass formula becomes: h = W<sub>0</sub>x + ΔWx = W<sub>0</sub>x + BAx. This reparameterization is depicted in Figure 1. For initialization, A is set to a random Gaussian distribution, and B is set to zero, resulting in ΔW = BA being zero at the start of training. We then adjust ΔWx by a factor of α/r, where α is a constant relative to r. Optimizing with Adam, adjusting α parallels tuning the learning rate, provided the initialization is scaled accordingly. Consequently, we fix α to the initial r value tested and do not modify it further. This scaling technique is instrumental in minimizing the need to recalibrate hyperparameters when varying r (Yang & Hu, 2021).
+                Neural networks are composed of numerous dense layers that
+                execute matrix multiplication tasks. Typically, these
+                layers' weight matrices are of full rank. According to
+                Aghajanyan et al. (2020), pre-trained language models,
+                although they possess a low "intrinsic dimension," are
+                still capable of efficient learning, even when
+                subjected to a random projection into a smaller
+                subspace. This insight leads us to propose that weight
+                updates during adaptation also exhibit a low
+                "intrinsic rank." To update a pre-trained weight
+                matrix W<sub>0</sub> in R<sup>d×k</sup>, we apply a
+                low-rank decomposition:
+                W<sub>0</sub> + ΔW = W<sub>0</sub> + BA,
+                where B ∈ R<sup>d×r</sup>, A ∈ R<sup>r×k</sup>, and
+                the rank r ≤ min(d, k). Throughout training,
+                W<sub>0</sub> remains static without receiving
+                gradient updates, whereas A and B are adjustable
+                parameters. Both W<sub>0</sub> and ΔW = BA are
+                multiplied by the same input, and their output
+                vectors are aggregated on a coordinate-wise basis.
+                Therefore, for h = W<sub>0</sub>x, our adjusted
+                forward pass formula becomes:
+                h = W<sub>0</sub>x + ΔWx = W<sub>0</sub>x + BAx. This
+                reparameterization is depicted in the below figure.
+                For initialization, A is set to a random Gaussian
+                distribution, and B is set to zero, resulting in
+                ΔW = BA being zero at the start of training.
                 </p>
                 
             <img src="images/architecture.png">
             <img src="images/Wo%20equation.png">
             <img src="images/A%20and%20B%20equation.png">
             <img src="images/equation.png">
+            <p>The training objective for full fine tuning is:</p>
             <img src="images/fft%20objective%20equation.png">
-            <img src="images/lora%20objective%20function.png">
+            <p>which now becomes:
+            </p><img src="images/lora%20objective%20function.png">
             <ul class="text-left">
                 <li>
                     <p>
@@ -70,9 +98,18 @@
             
             
             <img src="images/graphs.png">
+            <p>The above graphs demostrate the exceptional performance of LoRA despite having very few parameters in
+            comparison to full fine-tuning. Moreover, LoRA's performance is consistent and doesn't fluctuate on
+            increasing parameters. As rank becomes much higher, it's accuracy converges to that of the full fine-tuned
+            model.</p>
             <img src="images/gpt3%20lora.png">
+            <p>In the above table, we see that LoRA performs slightly better than fully fine-tuned GPT-3 model despite
+            having only about 5 million parameters.</p>
             <img src="images/num_trainable_params_table.png">
+            <p>It is astounding that LoRA provides state-of-the-art performance even with a rank of 2!</p>
             <img src="images/ranks_comparision_table.png">
+            <p>The above table shows the metrics by varying the rank and expanding the scope of LoRA to different
+            matrices in the attention modules of transformer.</p>
         </div>
     </div>
     <div class="row">
@@ -220,28 +257,35 @@
                 
     <ol>
         <li>
-            <strong>Healthcare</strong>: 
-            <p>Utilizing LoRA for fine-tuning LLMs for <em>Medical Document Analysis</em> to interpret and summarize medical documents, enhancing decision-making in patient care.</p>
+            <strong>Faster Deployment</strong>
+            <p>
+                <em>Problem</em>: Traditional fine-tuning of large models can be time-consuming, hindering quick deployment in real-world applications.
+            </p>
+            <p>
+                <em>Solution</em>: Parameter-efficient approaches allow for quicker training times, facilitating faster model deployment. This is especially crucial in industries where rapid adaptation to new data or changing requirements is essential.
+            </p>
         </li>
         <li>
-            <strong>Finance and Banking</strong>: 
-            <p>Improving <em>Automated Customer Support and Sentiment Analysis</em> for personalized customer experiences and informed investment strategies.</p>
+            <strong>Scalability</strong>
+            <p>
+                <em>Problem</em>: As models grow in size, scalability becomes a significant concern in terms of both infrastructure and costs.
+            </p>
+            <p>
+                <em>Solution</em>: Parameter-efficient fine-tuning methods enable the scaling of models without a linear increase in resources. This scalability is crucial for industries dealing with expanding datasets and evolving language patterns.
+            </p>
         </li>
         <li>
-            <strong>Legal Industry</strong>: 
-            <p>Finetuning using LoRA in <em>Contract Analysis and Legal Research</em> to streamline legal workflows and reduce human error by using LoRA to finetune LLMs.</p>
+            <strong>Memory and Inference Efficiency</strong>
+            <p>
+                <em>Problem</em>: Problem: Deploying large models for inference on resource-constrained devices can be challenging due to memory constraints.
+            </p>
+            <p>
+                <em>Solution</em>: Solution: Parameter-efficient fine-tuning approaches can lead to models with smaller memory footprints, making them more suitable for deployment on a wider range of devices, including edge devices and mobile platforms.
+            </p>
         </li>
-        <li>
-            <strong>Natural Language Processing in Tech and AI</strong>: 
-            <p>Enhancing <em>Personalized Digital Assistants and Search Engines</em> for better user understanding and accurate information retrieval.</p>
-        </li>
-        <li>
-            <strong>Education</strong>: 
-            <p>Adapting language models for <em>Personalized Learning Materials</em> to cater to individual learning styles and needs.</p>
-        </li>
-                <h2>Follow-on Research</h2>
+    </ol>
+    <h2>Follow-on Research</h2>
             <p>There are many directions for future works such as: </p>
-                    <ol>
                         <li>
                             LoRA can be combined with other efficient adaptation methods like prefix tuning, potentially providing orthogonal improvement.
                         </li>
