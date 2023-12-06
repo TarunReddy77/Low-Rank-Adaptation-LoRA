@@ -285,83 +285,129 @@
         </li>
     </ol>
     <h2>Follow-on Research</h2>
-            <p>There are many directions for future works such as: </p>
-                        <li>
-                            LoRA can be combined with other efficient adaptation methods like prefix tuning, potentially providing orthogonal improvement.
-                        </li>
-                        <li>
-                            The mechanism behind fine-tuning or LoRA is far from clear – how are features learned during pre-training
-                            transformed to do well on downstream tasks? We believe that LoRA makes it more tractable to answer this
-                            than full fine-tuning.
-                        </li>
-                        <li>
-                            We mostly depend on heuristics to select the weight matrices to apply LoRA to. Are there more principled
-                            ways to do it?
-                        </li>
-                        <li>
-                            Finally, the rank-deficiency of W suggests that W could be rank-deficient as well, which can also be a
-                            source of inspiration for future works.
-                        </li>
-                    </ol>
-                <h2>Peer-Review</h2>
-                <h5><b>Strong Accept</b></h5>
-                
-                <b>Paper Summary:</b>
-                <p>The paper introduces Low-Rank Adaptation (LoRA), a novel approach to adapt large pre-trained language models (LLMs) for specific tasks. LoRA strategically updates only a small fraction of the parameters, freezing the model's pretrained parameters, reducing the computational burden typically associated with fine-tuning such large models. The method involves injecting trainable rank decomposition matrices into the model's layers, thereby maintaining the pre-trained weights while enabling efficient adaptation.</p>
-                <b>Strengths:</b>
-                <ul>
-                    <li><strong>Innovative Approach:</strong> LoRA's strategy of using low-rank matrices for model adaptation is a significant departure from traditional full-model fine-tuning approaches. This innovation addresses a critical need in the field of NLP for more computationally efficient methods of adapting LLMs.</li>
-                    <li><strong>Empirical Validation:</strong> The authors provide a comprehensive set of experiments demonstrating LoRA's efficacy. These experiments, conducted on models like GPT-3, show that LoRA can achieve comparable or superior performance to full fine-tuning while requiring significantly fewer trainable parameters.</li>
-                    <li><strong>Practical Relevance:</strong> The method has high practical significance, especially for organizations with limited computational resources. It democratizes access to state-of-the-art LLMs by making their adaptation more accessible and less resource-intensive.</li>
-                    <li><strong>Clear Presentation:</strong> The paper is well-organized and clearly written, making complex concepts accessible to readers. The authors do an excellent job of explaining the motivation, theory, and practical implications of their work.</li>
-                </ul>
+        <p>There are many directions for future works such as: </p>
+        <ol>
+            <li>
+                LoRA can be combined with other efficient adaptation methods like prefix tuning, potentially providing orthogonal improvement.
+            </li>
+            <li>
+                The mechanism behind fine-tuning or LoRA is far from clear – how are features learned during pre-training
+                transformed to do well on downstream tasks? We believe that LoRA makes it more tractable to answer this
+                than full fine-tuning.
+            </li>
+            <li>
+                We mostly depend on heuristics to select the weight matrices to apply LoRA to. Are there more principled
+                ways to do it?
+            </li>
+            <li>
+                Finally, the rank-deficiency of W suggests that W could be rank-deficient as well, which can also be a
+                source of inspiration for future works.
+            </li>
+        </ol>
+            <p>There have been papers which have followed on with the ideas of low rank adaptation matrices presented in
+                this paper. Some of the notable ones are:
+            </p>
+            <ol>
+                <li>
+                    <h4>QLoRA</h4>
+                    <p>QLoRA is an efficient fine-tuning approach that
+                        reduces memory usage enough to fine-tune a 65B
+                        parameter model on a single 48GB GPU while
+                        preserving full 16-bit fine-tuning task
+                        performance. QLoRA backpropagates gradients
+                        through a frozen, 4-bit quantized pretrained
+                        language model into Low Rank Adapters~(LoRA).
+                        The best model family, named Guanaco,
+                        outperforms all previous openly released models
+                        on the Vicuna benchmark, reaching 99.3% of the
+                        performance level of ChatGPT while only
+                        requiring 24 hours of finetuning on a single GPU.
+                        QLoRA introduces a number of innovations to save
+                        memory without sacrificing performance:
+                        (a) 4-bit NormalFloat (NF4), a new data type that
+                        is information theoretically optimal for normally
+                        distributed weights (b) double quantization to
+                        reduce the average memory footprint by
+                        quantizing the quantization constants, and
+                        (c) paged optimziers to manage memory spikes.
+                        QLoRA is used to finetune more than 1,000 models,
+                        providing a detailed analysis of instruction
+                        following and chatbot performance across 8
+                        instruction datasets, multiple model types
+                        (LLaMA, T5), and model scales that would be
+                        infeasible to run with regular finetuning
+                        (e.g. 33B and 65B parameter models). The
+                        results show that QLoRA finetuning on a small
+                        high-quality dataset leads to state-of-the-art
+                        results, even when using smaller models than the
+                        previous SoTA.
+                </li>
+                <li>
+                    <h4>QALora</h4>
+                    <p>
+                        Quantization is a dominant way to compress and accelerate diffusion models, where post-training quantization (PTQ) and quantization-aware training (QAT) are two main approaches, each bearing its own properties. While PTQ exhibits efficiency in terms of both time and data usage, it may lead to diminished performance in low bit-width. On the other hand, QAT can alleviate performance degradation but comes with substantial demands on computational and data resources. To capitalize on the advantages while avoiding their respective drawbacks, this paper introduces a data-free and parameter-efficient fine-tuning framework for low-bit diffusion models, dubbed EfficientDM, to achieve QAT-level performance with PTQ-like efficiency. Specifically, they propose a quantization-aware variant of the low-rank adapter (QALoRA) that can be merged with model weights and jointly quantized to low bit-width. The fine-tuning process distills the denoising capabilities of the full-precision model into its quantized counterpart, eliminating the requirement for training data. They also introduce scale-aware optimization and employ temporal learned step-size quantization to further enhance performance.</p>
+                </li>
+                <li>
+                    <h4>GLoRA</h4>
+                    <p>
+                        GLoRA is a universal, parameter-efficient fine-tuning approach for diverse tasks. It enhances LoRA with a generalized prompt module, optimizing pre-trained model weights and activations. Its scalable, layer-wise structure search enables efficient parameter adaptation. GLoRA excels in transfer learning, few-shot learning, and domain generalization, outperforming previous methods on various datasets. With fewer parameters and no extra inference cost, GLoRA is a practical solution for resource-limited applications.
+                    </p>
+                </li>
+            </ol>
+    <h2>Peer-Review</h2>
+    <h5><b>Strong Accept</b></h5>
 
-                <b>Weaknesses:</b>
-                <ul>
-                    <li><strong>Generalizability Concerns:</strong> While the paper presents results on a range of NLP tasks, there is limited discussion/experiments on the generalizability of LoRA to other domains or model architectures beyond language models.</li>
-                    <li><strong>Theoretical Depth:</strong> The paper could benefit from a more in-depth theoretical analysis of why low-rank adaptations are effective for these models. A deeper exploration of the theoretical underpinnings would strengthen the paper's contributions.</li>
-                    
-                </ul>
+    <b>Paper Summary:</b>
+    <p>The paper introduces Low-Rank Adaptation (LoRA), a novel approach to adapt large pre-trained language models (LLMs) for specific tasks. LoRA strategically updates only a small fraction of the parameters, freezing the model's pretrained parameters, reducing the computational burden typically associated with fine-tuning such large models. The method involves injecting trainable rank decomposition matrices into the model's layers, thereby maintaining the pre-trained weights while enabling efficient adaptation.</p>
+    <b>Strengths:</b>
+    <ul>
+        <li><strong>Innovative Approach:</strong> LoRA's strategy of using low-rank matrices for model adaptation is a significant departure from traditional full-model fine-tuning approaches. This innovation addresses a critical need in the field of NLP for more computationally efficient methods of adapting LLMs.</li>
+        <li><strong>Empirical Validation:</strong> The authors provide a comprehensive set of experiments demonstrating LoRA's efficacy. These experiments, conducted on models like GPT-3, show that LoRA can achieve comparable or superior performance to full fine-tuning while requiring significantly fewer trainable parameters.</li>
+        <li><strong>Practical Relevance:</strong> The method has high practical significance, especially for organizations with limited computational resources. It democratizes access to state-of-the-art LLMs by making their adaptation more accessible and less resource-intensive.</li>
+        <li><strong>Clear Presentation:</strong> The paper is well-organized and clearly written, making complex concepts accessible to readers. The authors do an excellent job of explaining the motivation, theory, and practical implications of their work.</li>
+    </ul>
 
-                
+    <b>Weaknesses:</b>
+    <ul>
+        <li><strong>Generalizability Concerns:</strong> While the paper presents results on a range of NLP tasks, there is limited discussion/experiments on the generalizability of LoRA to other domains or model architectures beyond language models.</li>
+        <li><strong>Theoretical Depth:</strong> The paper could benefit from a more in-depth theoretical analysis of why low-rank adaptations are effective for these models. A deeper exploration of the theoretical underpinnings would strengthen the paper's contributions.</li>
+    </ul>
 
-                <b>Conclusion:</b>
-                <p>"LoRA: Low-Rank Adaptation of Large Language Models" is a highly valuable contribution to the field of AI. It addresses a pertinent challenge in the adaptation of LLMs with a novel, efficient, and effective method. The paper is well-written and thoroughly researched, offering both practical utility and a foundation for future research. While there are areas for further exploration, particularly in theoretical understanding and broader comparisons, the strengths of the paper significantly outweigh its limitations.</p>
+    <b>Conclusion:</b>
+    <p>"LoRA: Low-Rank Adaptation of Large Language Models" is a highly valuable contribution to the field of AI. It addresses a pertinent challenge in the adaptation of LLMs with a novel, efficient, and effective method. The paper is well-written and thoroughly researched, offering both practical utility and a foundation for future research. While there are areas for further exploration, particularly in theoretical understanding and broader comparisons, the strengths of the paper significantly outweigh its limitations.</p>
 
+    <h3>References</h3>
+    <p>
+        [1]<a href="http://arxiv.org/abs/2005.14165"> Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhari
+        wal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal,
+        Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M.
+        Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin,
+        Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford,
+        Ilya Sutskever, and Dario Amodei. <em>Language Models are Few-Shot Learners.</em></a> arXiv:2005.14165
+        [cs], July 2020.</p>
+    <p>
+        [2]<a href="https://arxiv.org/abs/1902.00751"> Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin de Laroussilhe,
+        Andrea Gesmundo, Mona Attariyan, and Sylvain Gelly. <em>Parameter-Efficient Transfer Learning
+        for NLP.</em></a> arXiv:1902.00751 [cs, stat], June 2019.
+        00751.
+    </p>
+    <p>
+        [3]<a href="http://arxiv.org/abs/2101.00190"> Xiang Lisa Li and Percy Liang. <em>Prefix-Tuning: Optimizing Continuous Prompts for Generation.</em></a>
+        arXiv:2101.00190 [cs], January 2021.
+    </p>
+    <p>
+        [4]<a href="http://arxiv.org/abs/2012.13255"> Armen Aghajanyan, Luke Zettlemoyer, and Sonal Gupta. <em>Intrinsic Dimensionality Explains the
+        Effectiveness of Language Model Fine-Tuning.</em></a> arXiv:2012.13255 [cs], December 2020.
+    </p>
+    <p>
+        [5]<a href="https://arxiv.org/abs/1706.03762"> Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez,
+        Łukasz Kaiser, and Illia Polosukhin. <em>Attention is all you need.</em></a> In Proceedings of the 31st In
+        ternational Conference on Neural Information Processing Systems, pp. 6000–6010, 2017.
+    </p>
 
+    <h2>Team Members</h2>
 
-                <h3>References</h3>
-                <p>
-                    [1]<a href="http://arxiv.org/abs/2005.14165"> Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhari
-                    wal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal,
-                    Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M.
-                    Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin,
-                    Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford,
-                    Ilya Sutskever, and Dario Amodei. <em>Language Models are Few-Shot Learners.</em></a> arXiv:2005.14165
-                    [cs], July 2020.</p>
-                <p>
-                    [2]<a href="https://arxiv.org/abs/1902.00751"> Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin de Laroussilhe,
-                    Andrea Gesmundo, Mona Attariyan, and Sylvain Gelly. <em>Parameter-Efficient Transfer Learning
-                    for NLP.</em></a> arXiv:1902.00751 [cs, stat], June 2019.
-                    00751.
-                </p>
-                <p>
-                    [3]<a href="http://arxiv.org/abs/2101.00190"> Xiang Lisa Li and Percy Liang. <em>Prefix-Tuning: Optimizing Continuous Prompts for Generation.</em></a>
-                    arXiv:2101.00190 [cs], January 2021.
-                </p>
-                <p>
-                    [4]<a href="http://arxiv.org/abs/2012.13255"> Armen Aghajanyan, Luke Zettlemoyer, and Sonal Gupta. <em>Intrinsic Dimensionality Explains the
-                    Effectiveness of Language Model Fine-Tuning.</em></a> arXiv:2012.13255 [cs], December 2020.
-                </p>
-                <p>
-                    [5]<a href="https://arxiv.org/abs/1706.03762"> Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez,
-                    Łukasz Kaiser, and Illia Polosukhin. <em>Attention is all you need.</em></a> In Proceedings of the 31st In
-                    ternational Conference on Neural Information Processing Systems, pp. 6000–6010, 2017.
-                </p>
-
-                <h2>Team Members</h2>
-
-                <p>Tarun Reddy Thandu, Bhavya Pranav Tandra</p>
+    <p>Tarun Reddy Thandu, Bhavya Pranav Tandra</p>
 
 
         </div><!--col-->
