@@ -120,17 +120,17 @@
                 </ul>
                 
                 
-                <img src="images/graphs.png">
+                <img src="images/graphs.png" class="my-3" style="display: block; margin: auto;" width="75%" height="75%">
                 <p>The above graphs demostrate the exceptional performance of LoRA despite having very few parameters in
                 comparison to full fine-tuning. Moreover, LoRA's performance is consistent and doesn't fluctuate on
                 increasing parameters. As rank becomes much higher, it's accuracy converges to that of the full fine-tuned
                 model.</p>
-                <img src="images/gpt3%20lora.png">
+                <img src="images/gpt3%20lora.png" class="my-3" style="display: block; margin: auto;" width="65%" height="65%">
                 <p>In the above table, we see that LoRA performs slightly better than fully fine-tuned GPT-3 model despite
                 having only about 5 million parameters.</p>
-                <img src="images/num_trainable_params_table.png">
+                <img src="images/num_trainable_params_table.png" class="my-3" style="display: block; margin: auto;" width="65%" height="65%">
                 <p>It is astounding that LoRA provides state-of-the-art performance even with a rank of 2!</p>
-                <img src="images/ranks_comparision_table.png">
+                <img src="images/ranks_comparision_table.png" class="my-3" style="display: block; margin: auto;" width="65%" height="65%">
                 <p>The above table shows the metrics by varying the rank and expanding the scope of LoRA to different
                 matrices in the attention modules of transformer.</p>
             </div>
@@ -346,49 +346,19 @@
             </p>
             <ol>
                 <li>
-                    <h4>QLoRA</h4>
-                    <p>QLoRA is an efficient fine-tuning approach that
-                        reduces memory usage enough to fine-tune a 65B
-                        parameter model on a single 48GB GPU while
-                        preserving full 16-bit fine-tuning task
-                        performance. QLoRA backpropagates gradients
-                        through a frozen, 4-bit quantized pretrained
-                        language model into Low Rank Adapters~(LoRA).
-                        The best model family, named Guanaco,
-                        outperforms all previous openly released models
-                        on the Vicuna benchmark, reaching 99.3% of the
-                        performance level of ChatGPT while only
-                        requiring 24 hours of finetuning on a single GPU.
-                        QLoRA introduces a number of innovations to save
-                        memory without sacrificing performance:
-                        (a) 4-bit NormalFloat (NF4), a new data type that
-                        is information theoretically optimal for normally
-                        distributed weights (b) double quantization to
-                        reduce the average memory footprint by
-                        quantizing the quantization constants, and
-                        (c) paged optimziers to manage memory spikes.
-                        QLoRA is used to finetune more than 1,000 models,
-                        providing a detailed analysis of instruction
-                        following and chatbot performance across 8
-                        instruction datasets, multiple model types
-                        (LLaMA, T5), and model scales that would be
-                        infeasible to run with regular finetuning
-                        (e.g. 33B and 65B parameter models). The
-                        results show that QLoRA finetuning on a small
-                        high-quality dataset leads to state-of-the-art
-                        results, even when using smaller models than the
-                        previous SoTA.
+                    <h4>QLoRA: Efficient Finetuning of Quantized LLMs</h4>
+                    <p>The paper "QLoRA: Efficient Finetuning of Quantized LLMs" introduces QLoRA, a method for efficiently fine-tuning large language models (LLMs) like a 65B parameter model on a single 48GB GPU. It preserves full 16-bit fine-tuning task performance while significantly reducing memory usage. QLoRA involves backpropagating gradients through a 4-bit quantized pretrained language model into Low Rank Adapters (LoRA). The paper presents several innovations, including 4-bit NormalFloat (NF4), Double Quantization, and Paged Optimizers, to save memory without sacrificing performance. It also provides detailed analyses of instruction following and chatbot performance across various datasets and model types. The paper's contributions highlight advancements in memory-efficient model fine-tuning and practical implications for AI research and applications. For more detailed information, you can access the full paper <a href= "https://ar5iv.org/pdf/2305.14314.pdf">here</a>.
                 </li>
                 <li>
-                    <h4>QALora</h4>
+                    <h4>QALoRA: Quantization-Aware Low-Rank Adaptation of Language Models</h4>
                     <p>
-                        Quantization is a dominant way to compress and accelerate diffusion models, where post-training quantization (PTQ) and quantization-aware training (QAT) are two main approaches, each bearing its own properties. While PTQ exhibits efficiency in terms of both time and data usage, it may lead to diminished performance in low bit-width. On the other hand, QAT can alleviate performance degradation but comes with substantial demands on computational and data resources. To capitalize on the advantages while avoiding their respective drawbacks, this paper introduces a data-free and parameter-efficient fine-tuning framework for low-bit diffusion models, dubbed EfficientDM, to achieve QAT-level performance with PTQ-like efficiency. Specifically, they propose a quantization-aware variant of the low-rank adapter (QALoRA) that can be merged with model weights and jointly quantized to low bit-width. The fine-tuning process distills the denoising capabilities of the full-precision model into its quantized counterpart, eliminating the requirement for training data. They also introduce scale-aware optimization and employ temporal learned step-size quantization to further enhance performance.</p>
-                </li>
-                <li>
-                    <h4>GLoRA</h4>
-                    <p>
-                        GLoRA is a universal, parameter-efficient fine-tuning approach for diverse tasks. It enhances LoRA with a generalized prompt module, optimizing pre-trained model weights and activations. Its scalable, layer-wise structure search enables efficient parameter adaptation. GLoRA excels in transfer learning, few-shot learning, and domain generalization, outperforming previous methods on various datasets. With fewer parameters and no extra inference cost, GLoRA is a practical solution for resource-limited applications.
+                        The paper titled "QALoRA: Quantization-Aware Low-Rank Adaptation of Language Models" presents QALoRA, a method for efficient and data-free fine-tuning of low-bit diffusion models. This approach merges model weights with a quantization-aware variant of low-rank adapters (LoRA) for joint low bit-width quantization. QALoRA distills the denoising capabilities of the full-precision model into its quantized counterpart without needing training data. It introduces scale-aware optimization and temporal learned step-size quantization, significantly enhancing performance. For more details, you can access the full paper <a href="https://arxiv.org/pdf/2309.14717v2.pdf">here</a>.
                     </p>
+                </li>
+                <li>
+                    <h4>GLoRA: Generalized Low-Rank Adaptation of Large Language Models</h4>
+                    <p>
+                        The paper titled "GLoRA: Generalized Low-Rank Adaptation of Large Language Models" introduces GLoRA, a method that enhances the Low-Rank Adaptation (LoRA) technique for fine-tuning large language models. GLoRA optimizes pre-trained model weights and activations with a generalized prompt module, focusing on efficient parameter adaptation. It showcases proficiency in transfer learning, few-shot learning, and domain generalization, surpassing previous methods across various datasets. GLoRA stands out for its fewer parameters and no extra inference cost, making it an effective solution for resource-constrained applications. For detailed insights, you can read the full paper <a href="https://arxiv.org/pdf/2306.07967.pdf">here</a>.</p>
                 </li>
             </ol>
         </div>
