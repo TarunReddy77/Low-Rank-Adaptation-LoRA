@@ -24,6 +24,12 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #233BF5;
 }
 
+.section {
+  padding: 20px 2; /* Adjust as needed */
+  margin-bottom: 40px; /* Adjust as needed */
+}
+
+
 table {
   width: 100%;
   border-collapse: collapse;
