@@ -30,25 +30,25 @@
 <body class="nd-docs">
 <div class="nd-pageheader">
     <div class="container">
-        <h1 class="lead">
-            <nobr class="widenobr"><b>P</b>arameter <b>E</b>fficient <b>F</b>ine <b>T</b>uning of <b>LLM</b>s through <b>Lo</b>w <b>R</b>ank <b>A</b>daptation</nobr>
+        <h1 class="display-2" >
+            <nobr class="widenobr display-2">LoRA: Low Rank Adaptation of Large Language Models</nobr>
 <!--            <nobr class="widenobr">for CS 7150</nobr>-->
         </h1>
     </div>
 </div><!-- end nd-pageheader -->
 
-<div class="container">
+<div class="container lead">
     <div class="row">
         <div class="col">
             <div class="section">
-                <h1>An Analysis of "LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS"</h1>
+                <h4 class="display-4">Analysis</h4>
                 <div class="mt-3 mb-5">
                     <p>The paper titled "LoRA: Low-Rank Adaptation of Large Language Models" presents an innovative approach to fine-tuning large pre-trained language models for specific tasks. The primary focus of this paper is to address the challenge of adapting these massive models, such as GPT-3, which are often prohibitively expensive to fine-tune and deploy due to their size and the number of parameters.</p>
                     <p>LoRA represents a significant advancement in the democratization of Large Language Models (LLMs) and similar expansive models. This approach effectively bridges the gap for individuals and organizations with limited budgets and computing resources, enabling them to fine-tune state-of-the-art large models. Previously, such an endeavor was predominantly feasible for major corporations equipped with substantial financial and computational capabilities. LoRA, therefore, marks a pivotal shift, making advanced AI technologies more accessible and leveling the playing field in the realm of AI research and application.</p>
             
                 </div>
             </div>
-            <h1>Methodology</h1>
+            <h4 class="display-4">Methodology</h4>
             <div class="mt-3 mb-5"><p>Neural networks are composed of numerous dense layers that
                 execute matrix multiplication tasks. Typically, these
                 layers' weight matrices are of full rank. According to
@@ -94,7 +94,7 @@
             </p>
         </div>
             
-            <h1>Why LoRA?</h1>
+            <h4 class="display-4">Why LoRA?</h4>
             <div class="mt-3 mb-5">
                 <ul class="text-left">
                     <li>
@@ -137,7 +137,7 @@
         </div>
         <div class="row">
 
-            <h1>Literature Review</h1>
+            <h4 class="display-4">Literature Review</h4>
             <div class="mt-3 mb-5"><p>
                 There have been many works on performing fine-tuning of Large Language Models for specific downstream tasks in a parameter efficient manner
                 in order to reduce the storage and computational costs. The paper discusses the below competitive approaches:
@@ -151,9 +151,9 @@
                 <b>Bias-only or BitFit</b> is a baseline where we only train the bias vectors while freezing everything else.
             </p>
             <p>
-                <b>Prefix-embedding tuning (PreEmbed)</b> inserts special tokens among the input tokens. These special tokens have trainable word embeddings and are generally not in the model’s vocabulary. Where
-                to place such tokens can have an impact on performance. We focus on “prefixing”, which prepends
-                such tokens to the prompt, and “infixing”, which appends to the prompt.
+                <b>Prefix-embedding tuning (PreEmbed)</b> inserts special tokens among the input tokens. These special tokens have trainable word embeddings and are generally not in the model's vocabulary. Where
+                to place such tokens can have an impact on performance. We focus on "prefixing", which prepends
+                such tokens to the prompt, and "infixing", which appends to the prompt.
             </p>
             <p>
                 <b>Prefix-layer tuning (PreLayer)</b> is an extension to prefix-embedding tuning. Instead of just learning
@@ -166,7 +166,7 @@
                 attention module (and the MLP module) and the subsequent residual connection. There are two
                 fully connected layers with biases in an adapter layer with a nonlinearity in between.
             </p></div>
-                <h1>Biography</h1>
+                <h4 class="display-4">Biography</h4>
                 
                 <div class="mt-3 mb-5">
                     <table>
@@ -279,7 +279,7 @@
                 
                   
                   
-                <h1>Social Impact</h1>
+                <h4 class="display-4">Social Impact</h4>
                 <div class="mt-3 mb-5"><p>Fine-tuning enormous language models is prohibitively expensive in terms of the hardware required and the storage/switching cost for hosting independent instances for different tasks. LoRA is an efficient adaptation strategy that neither introduces inference latency nor reduces input sequence length while retaining high model quality. Importantly, it allows for quick task-switching when deployed as a service by sharing the vast majority of the model parameters (W matrices) and only changing the A and B matrices for the task at hand. While it is demonstrated on Transformer language models, the proposed principles could be generally applicable to any neural networks with dense layers. The following points elaborate its social impact:</p>
                     <ul>
                         <li>
@@ -289,7 +289,7 @@
                             <b>Energy Consumption:</b> The more efficient use of computational resources can contribute to a decrease in overall energy consumption associated with training and deploying large language models. This aligns with growing concerns about the environmental impact of AI technologies and supports sustainable practices in the development of advanced language models.
                         </li>
                     </ul></div>
-                <h1>Industry Applications</h1>
+                <h4 class="display-4">Industry Applications</h4>
                 
     <div class="mt-3 mb-5"><ol>
         <li>
@@ -320,7 +320,7 @@
             </p>
         </li>
     </ol></div>
-    <h1>Follow-on Research</h1>
+    <h4 class="display-4">Follow-on Research</h4>
         <div class="mt-3 mb-5">
             <p>There are many directions for future works such as: </p>
         <ol>
@@ -346,23 +346,23 @@
             </p>
             <ol>
                 <li>
-                    <h4>QLoRA: Efficient Finetuning of Quantized LLMs</h4>
+                    <h4 class="text-muted">QLoRA: Efficient Finetuning of Quantized LLMs</h4>
                     <p>The paper "QLoRA: Efficient Finetuning of Quantized LLMs" introduces QLoRA, a method for efficiently fine-tuning large language models (LLMs) like a 65B parameter model on a single 48GB GPU. It preserves full 16-bit fine-tuning task performance while significantly reducing memory usage. QLoRA involves backpropagating gradients through a 4-bit quantized pretrained language model into Low Rank Adapters (LoRA). The paper presents several innovations, including 4-bit NormalFloat (NF4), Double Quantization, and Paged Optimizers, to save memory without sacrificing performance. It also provides detailed analyses of instruction following and chatbot performance across various datasets and model types. The paper's contributions highlight advancements in memory-efficient model fine-tuning and practical implications for AI research and applications. For more detailed information, you can access the full paper <a href= "https://ar5iv.org/pdf/2305.14314.pdf">here</a>.
                 </li>
                 <li>
-                    <h4>QALoRA: Quantization-Aware Low-Rank Adaptation of Language Models</h4>
+                    <h4 class="text-muted">QALoRA: Quantization-Aware Low-Rank Adaptation of Language Models</h4>
                     <p>
                         The paper titled "QALoRA: Quantization-Aware Low-Rank Adaptation of Language Models" presents QALoRA, a method for efficient and data-free fine-tuning of low-bit diffusion models. This approach merges model weights with a quantization-aware variant of low-rank adapters (LoRA) for joint low bit-width quantization. QALoRA distills the denoising capabilities of the full-precision model into its quantized counterpart without needing training data. It introduces scale-aware optimization and temporal learned step-size quantization, significantly enhancing performance. For more details, you can access the full paper <a href="https://arxiv.org/pdf/2309.14717v2.pdf">here</a>.
                     </p>
                 </li>
                 <li>
-                    <h4>GLoRA: Generalized Low-Rank Adaptation of Large Language Models</h4>
+                    <h4 class="text-muted">GLoRA: Generalized Low-Rank Adaptation of Large Language Models</h4>
                     <p>
                         The paper titled "GLoRA: Generalized Low-Rank Adaptation of Large Language Models" introduces GLoRA, a method that enhances the Low-Rank Adaptation (LoRA) technique for fine-tuning large language models. GLoRA optimizes pre-trained model weights and activations with a generalized prompt module, focusing on efficient parameter adaptation. It showcases proficiency in transfer learning, few-shot learning, and domain generalization, surpassing previous methods across various datasets. GLoRA stands out for its fewer parameters and no extra inference cost, making it an effective solution for resource-constrained applications. For detailed insights, you can read the full paper <a href="https://arxiv.org/pdf/2306.07967.pdf">here</a>.</p>
                 </li>
             </ol>
         </div>
-    <h1>Peer-Review</h1>
+    <h4 class="display-4">Peer-Review</h4>
     <div class="mt-3 mb-5">
         <h5><b>Strong Accept</b></h5>
 
@@ -386,7 +386,7 @@
     <p>"LoRA: Low-Rank Adaptation of Large Language Models" is a highly valuable contribution to the field of AI. It addresses a pertinent challenge in the adaptation of LLMs with a novel, efficient, and effective method. The paper is well-written and thoroughly researched, offering both practical utility and a foundation for future research. While there are areas for further exploration, particularly in theoretical understanding and broader comparisons, the strengths of the paper significantly outweigh its limitations.</p>
 
     </div>
-    <h1>References</h1>
+    <h4 class="display-4">References</h4>
     <div class="mt-3 mb-5">
         <p>
             [1]<a href="http://arxiv.org/abs/2005.14165"> Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhari
@@ -415,10 +415,15 @@
             Łukasz Kaiser, and Illia Polosukhin. <em>Attention is all you need.</em></a> In Proceedings of the 31st In
             ternational Conference on Neural Information Processing Systems, pp. 6000–6010, 2017.
         </p>
-
+        <h4 class="display-4 mt-3">Team Members:  </h4>    
+        <div class="mt-3 mb-5">
+        <p>Tarun Reddy Thandu, Bhavya Pranav Tandra</p>
+        </div>
+    </div>
+        
     </div><!--col-->
-    <h5>Team Members:  </h5><br>
-    <p class="ml-3">Tarun Reddy Thandu, Bhavya Pranav Tandra</p>
+    
+
     </div><!--row -->
     </div>
 
