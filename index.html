@@ -40,11 +40,16 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>An Analysis of "LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS"</h1>
-            <p>The paper titled "LoRA: Low-Rank Adaptation of Large Language Models" presents an innovative approach to fine-tuning large pre-trained language models for specific tasks. The primary focus of this paper is to address the challenge of adapting these massive models, such as GPT-3, which are often prohibitively expensive to fine-tune and deploy due to their size and the number of parameters.</p>
-            <p>LoRA represents a significant advancement in the democratization of Large Language Models (LLMs) and similar expansive models. This approach effectively bridges the gap for individuals and organizations with limited budgets and computing resources, enabling them to fine-tune state-of-the-art large models. Previously, such an endeavor was predominantly feasible for major corporations equipped with substantial financial and computational capabilities. LoRA, therefore, marks a pivotal shift, making advanced AI technologies more accessible and leveling the playing field in the realm of AI research and application.</p>
+            <div class="section">
+                <h1>An Analysis of "LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS"</h1>
+                <div class="mt-3 mb-5">
+                    <p>The paper titled "LoRA: Low-Rank Adaptation of Large Language Models" presents an innovative approach to fine-tuning large pre-trained language models for specific tasks. The primary focus of this paper is to address the challenge of adapting these massive models, such as GPT-3, which are often prohibitively expensive to fine-tune and deploy due to their size and the number of parameters.</p>
+                    <p>LoRA represents a significant advancement in the democratization of Large Language Models (LLMs) and similar expansive models. This approach effectively bridges the gap for individuals and organizations with limited budgets and computing resources, enabling them to fine-tune state-of-the-art large models. Previously, such an endeavor was predominantly feasible for major corporations equipped with substantial financial and computational capabilities. LoRA, therefore, marks a pivotal shift, making advanced AI technologies more accessible and leveling the playing field in the realm of AI research and application.</p>
+            
+                </div>
+            </div>
             <h1>Methodology</h1>
-            <p>Neural networks are composed of numerous dense layers that
+            <div class="mt-3 mb-5"><p>Neural networks are composed of numerous dense layers that
                 execute matrix multiplication tasks. Typically, these
                 layers' weight matrices are of full rank. According to
                 Aghajanyan et al. (2020), pre-trained language models,
@@ -87,52 +92,53 @@
                 \[ \max_{\Theta} \sum_{x,y \in Z} \sum_{t = 1}^{|y|} log(p_{\Phi_{0}}+\Delta \Phi_{(\Theta)}(y_{t}|x,y_{< t})) \]
 
             </p>
+        </div>
             
             <h1>Why LoRA?</h1>
-            <ul class="text-left">
-                <li>
-                    <p>
-                    <b>Challenges of Fine-Tuning:</b> Large-scale pre-trained language models, such as GPT-3, present challenges in deployment due to the extensive parameters involved in fine-tuning, making it computationally and storage-intensive.
-                    </p>
-                </li>
-                <li>
-                    <p>
-                    <b>Drawbacks of Traditional Methods:</b> Conventional approaches involving external modules for new tasks often introduce latency and compromise between efficiency and model quality, highlighting the need for more efficient adaptation strategies.
-                    </p>
-                </li>
-                <li>
-                    <p>
-                    <b>Inspiration from Intrinsic Dimension:</b> Taking inspiration from studies showing that over-parametrized models have a low intrinsic dimension, the proposed Low-Rank Adaptation (LoRA) approach leverages this concept to reduce the number of parameters needed during model adaptation.
-                    </p>
-                </li>
-                <li>
-                    <p>
-                    <b>LoRA Efficiency:</b> By optimizing rank decomposition matrices of dense layers' weight changes while keeping pre-trained weights frozen, LoRA achieves storage and compute efficiency. Even with models as large as GPT-3, a very low rank proves sufficient, making LoRA a practical and effective solution for efficient model adaptation.
-                    </p>
-                </li>
-            </ul>
-            
-            
-            <img src="images/graphs.png">
-            <p>The above graphs demostrate the exceptional performance of LoRA despite having very few parameters in
-            comparison to full fine-tuning. Moreover, LoRA's performance is consistent and doesn't fluctuate on
-            increasing parameters. As rank becomes much higher, it's accuracy converges to that of the full fine-tuned
-            model.</p>
-            <img src="images/gpt3%20lora.png">
-            <p>In the above table, we see that LoRA performs slightly better than fully fine-tuned GPT-3 model despite
-            having only about 5 million parameters.</p>
-            <img src="images/num_trainable_params_table.png">
-            <p>It is astounding that LoRA provides state-of-the-art performance even with a rank of 2!</p>
-            <img src="images/ranks_comparision_table.png">
-            <p>The above table shows the metrics by varying the rank and expanding the scope of LoRA to different
-            matrices in the attention modules of transformer.</p>
+            <div class="mt-3 mb-5">
+                <ul class="text-left">
+                    <li>
+                        <p>
+                        <b>Challenges of Fine-Tuning:</b> Large-scale pre-trained language models, such as GPT-3, present challenges in deployment due to the extensive parameters involved in fine-tuning, making it computationally and storage-intensive.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                        <b>Drawbacks of Traditional Methods:</b> Conventional approaches involving external modules for new tasks often introduce latency and compromise between efficiency and model quality, highlighting the need for more efficient adaptation strategies.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                        <b>Inspiration from Intrinsic Dimension:</b> Taking inspiration from studies showing that over-parametrized models have a low intrinsic dimension, the proposed Low-Rank Adaptation (LoRA) approach leverages this concept to reduce the number of parameters needed during model adaptation.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                        <b>LoRA Efficiency:</b> By optimizing rank decomposition matrices of dense layers' weight changes while keeping pre-trained weights frozen, LoRA achieves storage and compute efficiency. Even with models as large as GPT-3, a very low rank proves sufficient, making LoRA a practical and effective solution for efficient model adaptation.
+                        </p>
+                    </li>
+                </ul>
+                
+                
+                <img src="images/graphs.png">
+                <p>The above graphs demostrate the exceptional performance of LoRA despite having very few parameters in
+                comparison to full fine-tuning. Moreover, LoRA's performance is consistent and doesn't fluctuate on
+                increasing parameters. As rank becomes much higher, it's accuracy converges to that of the full fine-tuned
+                model.</p>
+                <img src="images/gpt3%20lora.png">
+                <p>In the above table, we see that LoRA performs slightly better than fully fine-tuned GPT-3 model despite
+                having only about 5 million parameters.</p>
+                <img src="images/num_trainable_params_table.png">
+                <p>It is astounding that LoRA provides state-of-the-art performance even with a rank of 2!</p>
+                <img src="images/ranks_comparision_table.png">
+                <p>The above table shows the metrics by varying the rank and expanding the scope of LoRA to different
+                matrices in the attention modules of transformer.</p>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
+        <div class="row">
 
             <h1>Literature Review</h1>
-            <p>
+            <div class="mt-3 mb-5"><p>
                 There have been many works on performing fine-tuning of Large Language Models for specific downstream tasks in a parameter efficient manner
                 in order to reduce the storage and computational costs. The paper discusses the below competitive approaches:
             </p>
@@ -159,131 +165,133 @@
                 <b>Adapter tuning</b> inserts adapter layers between the self
                 attention module (and the MLP module) and the subsequent residual connection. There are two
                 fully connected layers with biases in an adapter layer with a nonlinearity in between.
-            </p>
+            </p></div>
                 <h1>Biography</h1>
-                <br>
-                <table>
-                    <!-- Row for Edward J. Hu -->
-                    <tr>
-                      <td>
-                        <img src="images/Edward_Hu.jpeg" width = "200" height = "200" alt="Edward J. Hu">
-                        <br>
-                        
-                      </td>
-                      <td>
-                        <h6><b>Edward J. Hu</b></h6>
-                        <p>Edward J. Hu is a PhD student advised by Yoshua Bengio at University of Montreal. He was a researcher at Microsoft before he was a graduate student where he was working on large scale deployment of GPT-3 and theories of infinetely wide networks. He was an AI resident at Microsoft Research Redmond. He has 2551 citations with a h-index of 12.</p>
-                      </td>
-                    </tr>
-                  
-                    <!-- Row for Yelong Shen -->
-                    <tr>
-                      <td>
-                        <img src="images/Yelong_Shen.jpeg" width = "200" height = "200" alt="Yelong Shen">
-                        <br>
-                        
-                      </td>
-                      <td>
-                        <h6><b>Yelong Shen</b></h6>
-                        <p>Yelong Shen is a Researcher at Microsoft Redmond. Prior to this he was also a researcher at Tencent and a Research Software Engineer at Microsoft Redmond. He graduated with a PhD Degree in Computer Science from Kent State University. He has over 7000 citations and a h-index of 35</p>
-                      </td>
-                    </tr>
-                  
-                    <!-- Row for Phillip Wallis -->
-                    <tr>
-                      <td>
-                        <img src="images/Phillip_Wallis.jpeg" width = "200" height = "200" alt="Phillip Wallis">
-                        <br>
-                        
-                      </td>
-                      <td>
-                        <h6><b>Phillip Wallis</b></h6>
-                        <p>Phillip Wallis is a Senior Applied Scientist at AWS Security AI Research. Before this he was a Senior Applied Scientist at Azure AI - Microsoft, where he worked on LoRA. He graduated with a PhD Degree in Computer Science-Machine Learning from Oregon Health and Science University, where his research was primarily focused on Computer Vision and Healthcare AI. He has 1523 citations and a h-index of 4.</p>
-                      </td>
-                    </tr>
-                  
-                    <!-- Row for Zeyuan Allen-Zhu -->
-                    <tr>
-                      <td>
-                        <img src="images/Zeyuan_Allen_Zhu.jpeg" width = "200" height = "200" alt="Zeyuan Allen-Zhu">
-                        <br>
-                        
-                      </td>
-                      <td>
-                        <h6><b>Zeyuan Allen-Zhu</b></h6>
-                        <p>Zeyuan Allen Zhu is a CoreML member at Meta FAIR labs. Before this he was a Researcher at Microsoft Research Redmond, where he co-authored LoRA. He graduated with a PhD degree in Computer Science from Princeton, where he worked on machine learning and optimization theory. He has graduated with a Master's Degree in Computer Science from MIT where he was advised by Silvio Micali. He has 11204 citations and a h-index of 44.</p>
-                      </td>
-                    </tr>
-                  
-                    <!-- Row for Yuanzhi Li -->
-                    <tr>
-                      <td>
-                        <img src="images/Yuanzhi_Li.jpeg" width = "200" height = "200" alt="Yuanzhi Li">
-                        <br>
-                        
-                      </td>
-                      <td>
-                        <h6><b>Yuanzhi Li</b></h6>
-                        <p>Yuanzhi Li is a assistant professor in Machine Learning Department at CMU. He was a postdoc at Stanford and graduated with a PhD degree in Computer Science from Princeton. His bachelors was in Computer Science and Mathematics from Tsinghua University. He has over 12000 citations and has a h-index of 44</p>
-                      </td>
-                    </tr>
-                  
-                    <!-- Row for Shean Wang -->
-                    <tr>
-                      <td>
-                        <img src="images/Shean_Wang.jpeg" width = "200" height = "200" alt="Shean Wang">
-                        <br>
-                        
-                      </td>
-                      <td>
-                        <h6><b>Shean Wang</b></h6>
-                        <p>Shean Wang is a Principal Software Development Engineer at Microsoft. Before that he was a Senior Software developer at Microsoft. He graduated with a Master's degree in Computer Science from Beihang University</p>
-                      </td>
-                    </tr>
-                  
-                    <!-- Row for Lu Wang -->
-                    <tr>
-                      <td>
-                        <img src="images/Lu_Wang.jpeg" width = "200" height = "200" alt="Lu Wang">
-                        <br>
-                        
-                      </td>
-                      <td>
-                        <h6><b>Lu Wang</b></h6>
-                        <p> Lu Wang, Associate Professor at the University of Michigan, was previously with Northeastern University until 2020. She earned her Ph.D. in Computer Science from Cornell University, supervised by Professor Claire Cardie. Lu specializes in natural language processing, computational social science, and machine learning, focusing on text summarization, language generation, and applications such as media bias analysis. Her work received awards, including a CHI 2023 best paper honorable mention. Lu's research is funded by NSF, AFOSR, IARPA, and industry partnerships. As ACL equity director, she co-founded SIGSUMM and holds over 2500 citations with an h-index of 29</p>
-                      </td>
-                    </tr>
-                  
-                    <!-- Row for Weizhu Chen -->
-                    <tr>
-                      <td>
-                        <img src="images/Weizhu_Chen.jpeg" width = "200" height = "200" alt="Weizhu Chen">
-                        <br>
-                        
-                      </td>
-                      <td>
-                        <h6><b>Weizhu Chen</b></h6>
-                        <p>Weizhu Chen is Vice President of Science at Azure AI, Microsoft. He is also an author of RAdam and Deberta. He recieved his PhD in Computer Science from Hong Kong University of Science and Technology. He has over 13000 citations with a h-index of 46.</p>
-                      </td>
-                    </tr>
-                </table>
+                
+                <div class="mt-3 mb-5">
+                    <table>
+                        <!-- Row for Edward J. Hu -->
+                        <tr>
+                          <td>
+                            <img src="images/Edward_Hu.jpeg" width = "200" height = "200" alt="Edward J. Hu">
+                            <br>
+                            
+                          </td>
+                          <td>
+                            <h6><b>Edward J. Hu</b></h6>
+                            <p>Edward J. Hu is a PhD student advised by Yoshua Bengio at University of Montreal. He was a researcher at Microsoft before he was a graduate student where he was working on large scale deployment of GPT-3 and theories of infinetely wide networks. He was an AI resident at Microsoft Research Redmond. He has 2551 citations with a h-index of 12.</p>
+                          </td>
+                        </tr>
+                      
+                        <!-- Row for Yelong Shen -->
+                        <tr>
+                          <td>
+                            <img src="images/Yelong_Shen.jpeg" width = "200" height = "200" alt="Yelong Shen">
+                            <br>
+                            
+                          </td>
+                          <td>
+                            <h6><b>Yelong Shen</b></h6>
+                            <p>Yelong Shen is a Researcher at Microsoft Redmond. Prior to this he was also a researcher at Tencent and a Research Software Engineer at Microsoft Redmond. He graduated with a PhD Degree in Computer Science from Kent State University. He has over 7000 citations and a h-index of 35</p>
+                          </td>
+                        </tr>
+                      
+                        <!-- Row for Phillip Wallis -->
+                        <tr>
+                          <td>
+                            <img src="images/Phillip_Wallis.jpeg" width = "200" height = "200" alt="Phillip Wallis">
+                            <br>
+                            
+                          </td>
+                          <td>
+                            <h6><b>Phillip Wallis</b></h6>
+                            <p>Phillip Wallis is a Senior Applied Scientist at AWS Security AI Research. Before this he was a Senior Applied Scientist at Azure AI - Microsoft, where he worked on LoRA. He graduated with a PhD Degree in Computer Science-Machine Learning from Oregon Health and Science University, where his research was primarily focused on Computer Vision and Healthcare AI. He has 1523 citations and a h-index of 4.</p>
+                          </td>
+                        </tr>
+                      
+                        <!-- Row for Zeyuan Allen-Zhu -->
+                        <tr>
+                          <td>
+                            <img src="images/Zeyuan_Allen_Zhu.jpeg" width = "200" height = "200" alt="Zeyuan Allen-Zhu">
+                            <br>
+                            
+                          </td>
+                          <td>
+                            <h6><b>Zeyuan Allen-Zhu</b></h6>
+                            <p>Zeyuan Allen Zhu is a CoreML member at Meta FAIR labs. Before this he was a Researcher at Microsoft Research Redmond, where he co-authored LoRA. He graduated with a PhD degree in Computer Science from Princeton, where he worked on machine learning and optimization theory. He has graduated with a Master's Degree in Computer Science from MIT where he was advised by Silvio Micali. He has 11204 citations and a h-index of 44.</p>
+                          </td>
+                        </tr>
+                      
+                        <!-- Row for Yuanzhi Li -->
+                        <tr>
+                          <td>
+                            <img src="images/Yuanzhi_Li.jpeg" width = "200" height = "200" alt="Yuanzhi Li">
+                            <br>
+                            
+                          </td>
+                          <td>
+                            <h6><b>Yuanzhi Li</b></h6>
+                            <p>Yuanzhi Li is a assistant professor in Machine Learning Department at CMU. He was a postdoc at Stanford and graduated with a PhD degree in Computer Science from Princeton. His bachelors was in Computer Science and Mathematics from Tsinghua University. He has over 12000 citations and has a h-index of 44</p>
+                          </td>
+                        </tr>
+                      
+                        <!-- Row for Shean Wang -->
+                        <tr>
+                          <td>
+                            <img src="images/Shean_Wang.jpeg" width = "200" height = "200" alt="Shean Wang">
+                            <br>
+                            
+                          </td>
+                          <td>
+                            <h6><b>Shean Wang</b></h6>
+                            <p>Shean Wang is a Principal Software Development Engineer at Microsoft. Before that he was a Senior Software developer at Microsoft. He graduated with a Master's degree in Computer Science from Beihang University</p>
+                          </td>
+                        </tr>
+                      
+                        <!-- Row for Lu Wang -->
+                        <tr>
+                          <td>
+                            <img src="images/Lu_Wang.jpeg" width = "200" height = "200" alt="Lu Wang">
+                            <br>
+                            
+                          </td>
+                          <td>
+                            <h6><b>Lu Wang</b></h6>
+                            <p> Lu Wang, Associate Professor at the University of Michigan, was previously with Northeastern University until 2020. She earned her Ph.D. in Computer Science from Cornell University, supervised by Professor Claire Cardie. Lu specializes in natural language processing, computational social science, and machine learning, focusing on text summarization, language generation, and applications such as media bias analysis. Her work received awards, including a CHI 2023 best paper honorable mention. Lu's research is funded by NSF, AFOSR, IARPA, and industry partnerships. As ACL equity director, she co-founded SIGSUMM and holds over 2500 citations with an h-index of 29</p>
+                          </td>
+                        </tr>
+                      
+                        <!-- Row for Weizhu Chen -->
+                        <tr>
+                          <td>
+                            <img src="images/Weizhu_Chen.jpeg" width = "200" height = "200" alt="Weizhu Chen">
+                            <br>
+                            
+                          </td>
+                          <td>
+                            <h6><b>Weizhu Chen</b></h6>
+                            <p>Weizhu Chen is Vice President of Science at Azure AI, Microsoft. He is also an author of RAdam and Deberta. He recieved his PhD in Computer Science from Hong Kong University of Science and Technology. He has over 13000 citations with a h-index of 46.</p>
+                          </td>
+                        </tr>
+                    </table>
+                </div>
 
                 
                   
                   
                 <h1>Social Impact</h1>
-                <p>Fine-tuning enormous language models is prohibitively expensive in terms of the hardware required and the storage/switching cost for hosting independent instances for different tasks. LoRA is an efficient adaptation strategy that neither introduces inference latency nor reduces input sequence length while retaining high model quality. Importantly, it allows for quick task-switching when deployed as a service by sharing the vast majority of the model parameters (W matrices) and only changing the A and B matrices for the task at hand. While it is demonstrated on Transformer language models, the proposed principles could be generally applicable to any neural networks with dense layers. The following points elaborate its social impact:</p>
-                <ul>
-                    <li>
-                        <b>Resource Efficiency:</b> LoRA's ability to significantly reduce the number of parameters needed for model adaptation implies a potential reduction in computational and storage requirements. This could democratize access to advanced natural language processing capabilities, allowing a broader range of individuals, organizations, and applications to benefit from these technologies without extensive infrastructure.
-                    </li>
-                    <li>
-                        <b>Energy Consumption:</b> The more efficient use of computational resources can contribute to a decrease in overall energy consumption associated with training and deploying large language models. This aligns with growing concerns about the environmental impact of AI technologies and supports sustainable practices in the development of advanced language models.
-                    </li>
-                </ul>
+                <div class="mt-3 mb-5"><p>Fine-tuning enormous language models is prohibitively expensive in terms of the hardware required and the storage/switching cost for hosting independent instances for different tasks. LoRA is an efficient adaptation strategy that neither introduces inference latency nor reduces input sequence length while retaining high model quality. Importantly, it allows for quick task-switching when deployed as a service by sharing the vast majority of the model parameters (W matrices) and only changing the A and B matrices for the task at hand. While it is demonstrated on Transformer language models, the proposed principles could be generally applicable to any neural networks with dense layers. The following points elaborate its social impact:</p>
+                    <ul>
+                        <li>
+                            <b>Resource Efficiency:</b> LoRA's ability to significantly reduce the number of parameters needed for model adaptation implies a potential reduction in computational and storage requirements. This could democratize access to advanced natural language processing capabilities, allowing a broader range of individuals, organizations, and applications to benefit from these technologies without extensive infrastructure.
+                        </li>
+                        <li>
+                            <b>Energy Consumption:</b> The more efficient use of computational resources can contribute to a decrease in overall energy consumption associated with training and deploying large language models. This aligns with growing concerns about the environmental impact of AI technologies and supports sustainable practices in the development of advanced language models.
+                        </li>
+                    </ul></div>
                 <h1>Industry Applications</h1>
                 
-    <ol>
+    <div class="mt-3 mb-5"><ol>
         <li>
             <strong>Faster Deployment</strong>
             <p>
@@ -311,9 +319,10 @@
                 <em>Solution</em>: Solution: Parameter-efficient fine-tuning approaches can lead to models with smaller memory footprints, making them more suitable for deployment on a wider range of devices, including edge devices and mobile platforms.
             </p>
         </li>
-    </ol>
+    </ol></div>
     <h1>Follow-on Research</h1>
-        <p>There are many directions for future works such as: </p>
+        <div class="mt-3 mb-5">
+            <p>There are many directions for future works such as: </p>
         <ol>
             <li>
                 LoRA can be combined with other efficient adaptation methods like prefix tuning, potentially providing orthogonal improvement.
@@ -382,8 +391,10 @@
                     </p>
                 </li>
             </ol>
+        </div>
     <h1>Peer-Review</h1>
-    <h5><b>Strong Accept</b></h5>
+    <div class="mt-3 mb-5">
+        <h5><b>Strong Accept</b></h5>
 
     <b>Paper Summary:</b>
     <p>The paper introduces Low-Rank Adaptation (LoRA), a novel approach to adapt large pre-trained language models (LLMs) for specific tasks. LoRA strategically updates only a small fraction of the parameters, freezing the model's pretrained parameters, reducing the computational burden typically associated with fine-tuning such large models. The method involves injecting trainable rank decomposition matrices into the model's layers, thereby maintaining the pre-trained weights while enabling efficient adaptation.</p>
@@ -404,43 +415,47 @@
     <b>Conclusion:</b>
     <p>"LoRA: Low-Rank Adaptation of Large Language Models" is a highly valuable contribution to the field of AI. It addresses a pertinent challenge in the adaptation of LLMs with a novel, efficient, and effective method. The paper is well-written and thoroughly researched, offering both practical utility and a foundation for future research. While there are areas for further exploration, particularly in theoretical understanding and broader comparisons, the strengths of the paper significantly outweigh its limitations.</p>
 
+    </div>
     <h1>References</h1>
-    <p>
-        [1]<a href="http://arxiv.org/abs/2005.14165"> Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhari
-        wal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal,
-        Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M.
-        Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin,
-        Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford,
-        Ilya Sutskever, and Dario Amodei. <em>Language Models are Few-Shot Learners.</em></a> arXiv:2005.14165
-        [cs], July 2020.</p>
-    <p>
-        [2]<a href="https://arxiv.org/abs/1902.00751"> Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin de Laroussilhe,
-        Andrea Gesmundo, Mona Attariyan, and Sylvain Gelly. <em>Parameter-Efficient Transfer Learning
-        for NLP.</em></a> arXiv:1902.00751 [cs, stat], June 2019.
-        00751.
-    </p>
-    <p>
-        [3]<a href="http://arxiv.org/abs/2101.00190"> Xiang Lisa Li and Percy Liang. <em>Prefix-Tuning: Optimizing Continuous Prompts for Generation.</em></a>
-        arXiv:2101.00190 [cs], January 2021.
-    </p>
-    <p>
-        [4]<a href="http://arxiv.org/abs/2012.13255"> Armen Aghajanyan, Luke Zettlemoyer, and Sonal Gupta. <em>Intrinsic Dimensionality Explains the
-        Effectiveness of Language Model Fine-Tuning.</em></a> arXiv:2012.13255 [cs], December 2020.
-    </p>
-    <p>
-        [5]<a href="https://arxiv.org/abs/1706.03762"> Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez,
-        Łukasz Kaiser, and Illia Polosukhin. <em>Attention is all you need.</em></a> In Proceedings of the 31st In
-        ternational Conference on Neural Information Processing Systems, pp. 6000–6010, 2017.
-    </p>
-
-    <h1>Team Members</h1>
-
-    <p>Tarun Reddy Thandu, Bhavya Pranav Tandra</p>
+    <div class="mt-3 mb-5">
+        <p>
+            [1]<a href="http://arxiv.org/abs/2005.14165"> Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhari
+            wal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal,
+            Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M.
+            Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin,
+            Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford,
+            Ilya Sutskever, and Dario Amodei. <em>Language Models are Few-Shot Learners.</em></a> arXiv:2005.14165
+            [cs], July 2020.</p>
+        <p>
+            [2]<a href="https://arxiv.org/abs/1902.00751"> Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin de Laroussilhe,
+            Andrea Gesmundo, Mona Attariyan, and Sylvain Gelly. <em>Parameter-Efficient Transfer Learning
+            for NLP.</em></a> arXiv:1902.00751 [cs, stat], June 2019.
+            00751.
+        </p>
+        <p>
+            [3]<a href="http://arxiv.org/abs/2101.00190"> Xiang Lisa Li and Percy Liang. <em>Prefix-Tuning: Optimizing Continuous Prompts for Generation.</em></a>
+            arXiv:2101.00190 [cs], January 2021.
+        </p>
+        <p>
+            [4]<a href="http://arxiv.org/abs/2012.13255"> Armen Aghajanyan, Luke Zettlemoyer, and Sonal Gupta. <em>Intrinsic Dimensionality Explains the
+            Effectiveness of Language Model Fine-Tuning.</em></a> arXiv:2012.13255 [cs], December 2020.
+        </p>
+        <p>
+            [5]<a href="https://arxiv.org/abs/1706.03762"> Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez,
+            Łukasz Kaiser, and Illia Polosukhin. <em>Attention is all you need.</em></a> In Proceedings of the 31st In
+            ternational Conference on Neural Information Processing Systems, pp. 6000–6010, 2017.
+        </p>
+    </div>
 
 
         </div><!--col-->
+        <h5>Team Members:</h5>
+        <p>Tarun Reddy Thandu, Bhavya Pranav Tandra</p>
     </div><!--row -->
+    
+   
 </div> <!-- container -->
+
 
 <footer class="nd-pagefooter">
     <div class="row">
