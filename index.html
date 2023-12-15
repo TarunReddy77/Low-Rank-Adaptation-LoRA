@@ -120,6 +120,29 @@
                 </ul>
                 
                 
+
+
+                <h4 class="display-4">Why Does It Succeed?</h4>
+
+    <p>Empirical research within the paper delves into the comparison of top singular values between adaptive matrices of different ranks (denoted as i and j, where i << j). The findings of these studies reveal a substantial overlap in the top singular values of both matrices. This discovery implies that a matrix with a much lower rank already encapsulates most of the information present in a larger rank matrix. As a result, the rank decomposition in LoRA can be achieved without a significant sacrifice in performance.</p>
+
+    <p>Here is the formula for calculating the normalized subspace similarity:</p>
+
+    <p style="text-align: center;">
+        \(\phi (A_{r=8}, A_{r=64}, i, j) = \frac{||U_{A_{r=8}}^{iT} U_{A_{r=64}}^{jT}||_{F}^{2}}{min(i,j)} \in [0,1]\)
+    </p>
+
+    <img src="images/subspacesim.png" class="my-3" style="display: block; margin: auto;" width="75%" height="75%">
+
+    <p>The figure above illustrates the subspace similarity between the column vectors of \(A_{r=8}\) and \(A_{r=64}\) for both \(\Delta W_{q}\) and \(\Delta W_{v}\). The third and fourth figures provide a closer look at the lower-left triangle in the first two figures. Notably, the top directions of r=8 are encompassed within r=64, and vice versa.</p>
+
+    <p>It is important to note that the directions corresponding to the top singular vectors exhibit significant overlap between \(A_{r=8}\) and \(A_{r=64}\), while other directions do not. This observation suggests that the most crucial information is contained in the top singular values of a low-rank matrix, allowing for effective low-rank decomposition. In contrast, other directions contain random noise that accumulates during training.</p>
+
+    <img src="images/normsubsim.png" class="my-3" style="display: block; margin: auto;" width="75%" height="75%">
+
+    <p>The figure above further substantiates this finding by plotting the normalized subspace similarity between two randomly seeded runs with r=64. The first and second figures depict the normalized subspace similarity between the column vectors of \(A_{r=64}\) from two random seeds for both \(\Delta W_{q}\) and \(\Delta W_{v}\) in the 48-th layer. The third figure represents the same heatmap between the column vectors of two random Gaussian matrices.</p>
+
+                <h4 class="display-4">Results</h4>
                 <img src="images/graphs.png" class="my-3" style="display: block; margin: auto;" width="75%" height="75%">
                 <p>The above graphs demostrate the exceptional performance of LoRA despite having very few parameters in
                 comparison to full fine-tuning. Moreover, LoRA's performance is consistent and doesn't fluctuate on
@@ -134,6 +157,8 @@
                 <p>The above table shows the metrics by varying the rank and expanding the scope of LoRA to different
                 matrices in the attention modules of transformer.</p>
             </div>
+            
+
         </div>
         <div class="row">
 
