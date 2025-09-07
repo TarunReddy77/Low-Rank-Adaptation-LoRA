@@ -1,6 +1,6 @@
 # LoRA: Low‑Rank Adaptation of Large Language Models
 
-[![Live](https://img.shields.io/badge/Live-GitHub%20Pages-1461DE)](https://tarunreddythandu.github.io/lora/) ![Last commit](https://img.shields.io/github/last-commit/tarunreddythandu/lora) ![License](https://img.shields.io/badge/License-MIT-green)
+[![Live](https://img.shields.io/badge/Live-GitHub%20Pages-1461DE)](https://tarunreddy77.github.io/Low-Rank-Adaptation-LoRA/) ![Last commit](https://img.shields.io/github/last-commit/TarunReddy77/Low-Rank-Adaptation-LoRA) ![License](https://img.shields.io/badge/License-MIT-green)
 
 An accessible, visual explainer of the paper “[LoRA: Low‑Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)”. It covers the method, results, comparisons to related work, author bios, impact, and follow‑on research.
 
@@ -17,7 +17,7 @@ An accessible, visual explainer of the paper “[LoRA: Low‑Rank Adaptation of 
 
 ## Live site
 
-Deployed on GitHub Pages: `https://tarunreddythandu.github.io/lora/`
+Deployed on GitHub Pages: `https://tarunreddy77.github.io/Low-Rank-Adaptation-LoRA/`
 
 ## Quick start
 
