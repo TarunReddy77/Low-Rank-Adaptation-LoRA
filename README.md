@@ -1,19 +1,49 @@
-# Class Project Website Template
+# LoRA: Low‑Rank Adaptation of Large Language Models
 
-Copy this template on github, and rename the repo to the name of your project.
+[![Live](https://img.shields.io/badge/Live-GitHub%20Pages-1461DE)](https://tarunreddythandu.github.io/lora/) ![Last commit](https://img.shields.io/github/last-commit/tarunreddythandu/lora) ![License](https://img.shields.io/badge/License-MIT-green)
 
-Then go to the repo "Settings" and change "Webhook" settings, to "Add a webhook."
+An accessible, visual explainer of the paper “[LoRA: Low‑Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)”. It covers the method, results, comparisons to related work, author bios, impact, and follow‑on research.
 
-Set up the webhook exactly as you see in the image below, so that it sends
-JSON push notifications to `https://expo.baulab.info/push`.  To work, it will
-need to have the secret pictured.
+![Preview](images/architecture.png)
 
-<img src="webhook.png" style="max-width:100%">
+## What’s inside
 
-Then whenever you push your website, it will show up on
-https://expo.baulab.info/2023-Fall/[username].  Customize your
-`index.html`.
+- **Methodology**: How LoRA injects low‑rank adapters and why it works
+- **Results**: Performance vs. full fine‑tuning, rank sensitivity
+- **Literature review**: FT, BitFit, Prefix/Adapter tuning comparisons
+- **Author biographies**: Short profiles of the paper’s authors
+- **Impact & Applications**: Social/industry implications, deployment
+- **Follow‑on research**: QLoRA, QALoRA, GLoRA and more
 
-Your final project report will be a static HTML website that
-shares your insights.  As you develop your
-methods, results, and narrative, add content as needed here.
+## Live site
+
+Deployed on GitHub Pages: `https://tarunreddythandu.github.io/lora/`
+
+## Quick start
+
+1. Clone the repo
+2. Open `index.html` in your browser
+
+## Tech stack
+
+- HTML, CSS, Bootstrap, MathJax
+- Responsive layout, accessible alt text, social cards (OpenGraph/Twitter)
+
+## Repository structure
+
+```
+.
+├── index.html
+├── style.css
+├── images/
+└── README.md
+```
+
+## Credits
+
+- Paper: “[LoRA: Low‑Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)”
+- Images/figures belong to their respective authors; used for educational purposes
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE`.
